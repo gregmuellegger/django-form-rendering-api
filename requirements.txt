@@ -1,0 +1,1 @@
+-e git+ssh://git@github.com:gregmuellegger/django.git@soc2011/form-rendering#egg=Django
