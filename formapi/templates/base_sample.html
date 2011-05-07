@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>{% block headline %}{% endblock %}</h1>
+
+<div>
+    <h2>Output complete form</h2>
+    {% block complete_form %}<p>missing ...</p>{% endblock %}
+</div>
+
+<div>
+    <h2>Output as ul</h2>
+    {% block as_ul %}<p>missing ...</p>{% endblock %}
+</div>
+
+<div>
+    <h2>Output single field</h2>
+    {% block single_field %}<p>missing ...</p>{% endblock %}
+</div>
+{% endblock %}

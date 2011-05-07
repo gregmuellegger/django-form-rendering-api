@@ -1,0 +1,24 @@
+{% extends "base_sample.html" %}
+
+
+{% block headline %}Legacy API{% endblock %}
+
+
+{% block complete_form %}
+    {{ registration_form }}
+{% endblock %}
+
+
+{% block as_ul %}
+    <ul>
+        {{ registration_form.as_ul }}
+    </ul>
+{% endblock %}
+
+
+{% block single_field %}
+    {{ registration_form.first_name.label_tag }}:
+    {{ registration_form.first_name }}
+    {{ registration_form.first_name.help_text }}
+    {{ registration_form.first_name.errors }}
+{% endblock %}
