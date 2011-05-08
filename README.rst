@@ -17,7 +17,13 @@ commandline::
     cd django-form-rendering-api
     virtualenv .
     source bin/activate
-    pip install -r requirements
+    pip install -r requirements.txt
     python formapi/manage.py syncdb --noinput
 
 Make sure that you have ``git`` and ``virtualenv`` installed.
+
+After you have installed the project, you can ``cd`` to ``formapi/`` and start
+the development server: ``python manage.py runserver``. After that try to
+access http://localhost:8000/ . You will find a list of proposals for
+syntaxes. Click on the links to see the corresponding source code how the
+final usage may look like.
