@@ -5,17 +5,39 @@
 <h1>{% block headline %}{% endblock %}</h1>
 
 <div>
-    <h2>Output complete form</h2>
-    {% block complete_form %}<p>missing ...</p>{% endblock %}
+    <h2>Complete form</h2>
+    <p>Display the form with all fields in default order without any modifications using the default layout.</p>
+    {% block complete_form %}{% endblock %}
 </div>
 
 <div>
-    <h2>Output as ul</h2>
-    {% block as_ul %}<p>missing ...</p>{% endblock %}
+    <h2>Change layout</h2>
+    <p>Display form with layout "ul".</p>
+    {% block as_ul %}{% endblock %}
 </div>
 
 <div>
-    <h2>Output single field</h2>
-    {% block single_field %}<p>missing ...</p>{% endblock %}
+    <h2>Single field</h2>
+    <p>Display only the first_name field of registration_form.</p>
+    {% block single_field %}{% endblock %}
+</div>
+
+<div>
+    <h2>Two forms</h2>
+    <p>The two forms should be displayed, first with "ul" layout and second as "table".</p>
+    {% block two_forms %}{% endblock %}
+</div>
+
+<div>
+    <h2>Field order</h2>
+    <p>Display registration_form but show the fields in the order: email, password, first_name, last_name, birthday</p>
+    {% block field_order %}{% endblock %}
+</div>
+
+<div>
+    <h2>Change widgets</h2>
+    <p>Use long_form. Change widget of char2 to PasswordInput and use
+    DatePicker widget for all DateFields. Display all fields in common order.</p>
+    {% block change_widgets %}{% endblock %}
 </div>
 {% endblock %}

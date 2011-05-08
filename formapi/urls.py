@@ -17,6 +17,8 @@ urlpatterns = patterns('',
          {'template_name': 'api_samples/legacy.html'}),
      url(r'^single-tag/$', 'formapi.api_samples.views.form_api_sample',
          {'template_name': 'api_samples/single_tag.html'}),
+     url(r'^modifier-tags/$', 'formapi.api_samples.views.form_api_sample',
+         {'template_name': 'api_samples/modifier_tags.html'}),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

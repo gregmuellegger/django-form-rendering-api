@@ -2,6 +2,10 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 
+class ColorForm(forms.Form):
+    color = forms.RegexField(label=_('Color'), regex=r'^#[a-fA-F0-9]{6}$')
+
+
 class RegistrationForm(forms.Form):
     first_name = forms.CharField(
         label=_('First name'),
@@ -16,47 +20,22 @@ class RegistrationForm(forms.Form):
     password = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
 
 
-class VeryLongForm(forms.Form):
-    field1 = forms.CharField()
-    field2 = forms.CharField()
-    field3 = forms.CharField()
-    field4 = forms.CharField()
-    field5 = forms.CharField()
-    field6 = forms.CharField()
-    field7 = forms.CharField()
-    field8 = forms.CharField()
-    field9 = forms.CharField()
-    field10 = forms.CharField()
-    field11 = forms.CharField()
-    field12 = forms.CharField()
-    field13 = forms.CharField()
-    field14 = forms.CharField()
-    field15 = forms.CharField()
-    field16 = forms.CharField()
-    field17 = forms.CharField()
-    field18 = forms.CharField()
-    field19 = forms.CharField()
-    field20 = forms.CharField()
-    field21 = forms.CharField()
-    field22 = forms.CharField()
-    field23 = forms.CharField()
-    field24 = forms.CharField()
-    field25 = forms.CharField()
-    field26 = forms.CharField()
-    field27 = forms.CharField()
-    field28 = forms.CharField()
-    field29 = forms.CharField()
-    field30 = forms.CharField()
-    field31 = forms.CharField()
-    field32 = forms.CharField()
-    field33 = forms.CharField()
-    field34 = forms.CharField()
-    field35 = forms.CharField()
-    field36 = forms.CharField()
-    field37 = forms.CharField()
-    field38 = forms.CharField()
-    field39 = forms.CharField()
-    field40 = forms.CharField()
+class LongForm(forms.Form):
+    char1 = forms.CharField()
+    char2 = forms.CharField()
+    char3 = forms.CharField()
+    char4 = forms.CharField()
+    char5 = forms.CharField()
+    integer1 = forms.IntegerField()
+    integer2 = forms.IntegerField()
+    integer3 = forms.IntegerField()
+    integer4 = forms.IntegerField()
+    integer5 = forms.IntegerField()
+    date1 = forms.DateField()
+    date2 = forms.DateField()
+    date3 = forms.DateField()
+    date4 = forms.DateField()
+    date5 = forms.DateField()
 
 
 class FieldTypeForm(forms.Form):

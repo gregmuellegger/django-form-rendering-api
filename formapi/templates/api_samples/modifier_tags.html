@@ -1,0 +1,60 @@
+{% extends "base_sample.html" %}
+
+
+{% block complete_form %}
+    {% form registration_form %}
+{% endblock %}
+
+
+{% block as_ul %}
+    {% form %}
+        {% layout "ul" %}
+        <ul>
+            {% form registration_form %}
+        </ul>
+    {% endform %}
+{% endblock %}
+
+
+{% block single_field %}
+    {% form %}
+        {% field registration_form.first_name %}
+    {% endform %}
+{% endblock %}
+
+
+{% block two_forms %}
+    {% form %}
+        {% layout "ul" %}
+        <ul>
+            {% form color_form %}
+        </ul>
+    {% endform %}
+
+    {% form %}
+        {% layout "table" %}
+        <table>
+            {% form registration_form %}
+        </table>
+    {% endform %}
+{% endblock %}
+
+
+{% block field_order %}
+    {% form %}
+        {% field registration_form.email %}
+        {% field registration_form.password %}
+        {% field registration_form.first_name %}
+        {% field registration_form.last_name %}
+        {% field registration_form.birthday %}
+    {% endform %}
+{% endblock %}
+
+
+{% block change_widgets %}
+    {% form %}
+        {% widget PasswordInput for long_form.char2 %}
+        {% widget DatePicker for DateField %}
+        {% form long_form %}
+    {% endform %}
+{% endblock %}

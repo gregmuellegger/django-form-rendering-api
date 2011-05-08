@@ -22,3 +22,14 @@
     {{ registration_form.first_name.help_text }}
     {{ registration_form.first_name.errors }}
 {% endblock %}
+
+
+{% block two_forms %}
+    <ul>
+        {{ color_form.as_ul }}
+    </ul>
+
+    <table>
+        {{ color_form.as_table }}
+    </table>
+{% endblock %}
