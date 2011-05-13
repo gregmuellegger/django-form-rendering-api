@@ -1,4 +1,5 @@
 import re
+from django.template.loader import render_to_string
 from django.template import Context, Template
 from django.test import TestCase
 
@@ -6,13 +7,14 @@ from django.test import TestCase
 WHITESPACE = re.compile('\s+')
 
 
-class MediaRenderTests(TestCase):
-    def assertEqual(self, first, second, msg=None, ignore_whitespace=False):
-        if ignore_whitespace:
-            first = WHITESPACE.sub('', first)
-            second = WHITESPACE.sub('', second)
-        super(MediaRenderTests, self).assertEqual(first, second, msg)
+class IgnoreWhitespaceTestCase(TestCase):
+    def assertEqualExceptWhitespace(self, first, second, msg=None):
+        first = WHITESPACE.sub('', first)
+        second = WHITESPACE.sub('', second)
+        super(IgnoreWhitespaceTestCase, self).assertEqual(first, second, msg)
 
+
+class MediaRenderTests(IgnoreWhitespaceTestCase):
     def test_template_lib_exists(self):
         Template('{% load media_tags %}')
 
@@ -33,13 +35,13 @@ class MediaRenderTests(TestCase):
         after media
         ''')
         output = t.render(Context())
-        self.assertEqual(output, '''
+        self.assertEqualExceptWhitespace(output, '''
             before media
             <style type="text/css">
                 html { display: none; }
             </style>
             after media
-            ''', ignore_whitespace=True)
+            ''')
 
     def test_media_tag_outputs_recorded_content_even_before_the_content_is_defined(self):
         t = Template('''
@@ -56,10 +58,22 @@ class MediaRenderTests(TestCase):
         {% endaddmedia %}
         ''')
         output = t.render(Context())
-        self.assertEqual(output, '''
+        self.assertEqualExceptWhitespace(output, '''
             before media
             <style type="text/css">
                 html { display: none; }
             </style>
             after media
-            ''', ignore_whitespace=True)
+            ''')
+
+
+class InheritanceTests(IgnoreWhitespaceTestCase):
+    def test_simple_inheritance(self):
+        context = {}
+        output = render_to_string(
+            'media_framework/tests/test_simple_inheritance.html',
+            context)
+        expected = render_to_string(
+            'media_framework/tests/test_simple_inheritance.expect.html',
+            context)
+        self.assertEqualExceptWhitespace(output, expected)

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load media_tags %}
+<html>
+<head>
+    {% block extra_head %}{% endblock %}
+    {% media "css" %}
+</head>
+<body>
+    {% block content %}
+        Foobar
+    {% endblock %}
+    {% media "js" %}
+</body>
+</html>

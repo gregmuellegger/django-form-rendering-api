@@ -4,8 +4,20 @@ from django import template
 register = template.Library()
 
 
-def _context_key(media_type):
-    return '_media_%s' % media_type
+class MediaDict(dict):
+    context_attribute = '_media'
+
+    def __getitem__(self, key):
+        return self.setdefault(key, [])
+
+    def get_content(self, key):
+        return self.pop(key, [])
+
+    @classmethod
+    def from_context(cls, context):
+        if not hasattr(context, cls.context_attribute):
+            setattr(context, cls.context_attribute, cls())
+        return getattr(context, cls.context_attribute)
 
 
 class MediaNode(template.Node):
@@ -24,13 +36,11 @@ class MediaNode(template.Node):
         self.nodelist = nodelist
 
     def render(self, context):
-        output = [self.nodelist.render(context)]
-
-        context_key = _context_key(self.media_type)
-        if context_key in context:
-            contents = context[context_key]
-            output.insert(0, ''.join(contents))
-            del context[context_key]
+        media = MediaDict.from_context(context)
+        contents = self.nodelist.render(context)
+        output = []
+        output.extend(media.get_content(self.media_type))
+        output.append(contents)
         return ''.join(output)
 
     @classmethod
@@ -62,10 +72,8 @@ class AddMediaNode(template.Node):
         self.nodelist = nodelist
 
     def render(self, context):
-        context_key = _context_key(self.media_type)
-        if context_key not in context:
-            context[context_key] = []
-        context[context_key].append(self.nodelist.render(context))
+        media = MediaDict.from_context(context)
+        media[self.media_type].append(self.nodelist.render(context))
         return ''
 
     @classmethod

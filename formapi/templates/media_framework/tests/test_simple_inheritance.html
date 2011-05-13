@@ -1,0 +1,15 @@
+{% extends "media_framework/tests/base.html" %}
+{% load media_tags %}
+
+
+{% block content %}
+    {% addmedia "css" %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+    {% endaddmedia %}
+
+    {% addmedia "js" %}
+        <script type="text/javascript">
+            console.log('spam');
+        </script>
+    {% endaddmedia %}
+{% endblock %}
