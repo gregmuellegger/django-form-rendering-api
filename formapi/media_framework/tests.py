@@ -27,9 +27,33 @@ class MediaRenderTests(TestCase):
             html { display: none; }
         </style>
         {% endaddmedia %}
+
         before media
         {% media "css" %}
         after media
+        ''')
+        output = t.render(Context())
+        self.assertEqual(output, '''
+            before media
+            <style type="text/css">
+                html { display: none; }
+            </style>
+            after media
+            ''', ignore_whitespace=True)
+
+    def test_media_tag_outputs_recorded_content_even_before_the_content_is_defined(self):
+        t = Template('''
+        {% load media_tags %}
+
+        before media
+        {% media "css" %}
+        after media
+
+        {% addmedia "css" %}
+        <style type="text/css">
+            html { display: none; }
+        </style>
+        {% endaddmedia %}
         ''')
         output = t.render(Context())
         self.assertEqual(output, '''

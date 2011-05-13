@@ -19,23 +19,26 @@ class MediaNode(template.Node):
         {% media "js" %}
     '''
 
-    def __init__(self, media_type):
+    def __init__(self, media_type, nodelist):
         self.media_type = media_type
+        self.nodelist = nodelist
 
     def render(self, context):
+        output = [self.nodelist.render(context)]
+
         context_key = _context_key(self.media_type)
         if context_key in context:
             contents = context[context_key]
-            output = ''.join(contents)
+            output.insert(0, ''.join(contents))
             del context[context_key]
-            return output
-        return ''
+        return ''.join(output)
 
     @classmethod
     def parse(cls, parser, tokens):
         bits = tokens.split_contents()
         tag_name, media_type = bits
-        return cls(media_type)
+        nodelist = parser.parse()
+        return cls(media_type, nodelist)
 
 
 class AddMediaNode(template.Node):
