@@ -15,9 +15,9 @@ class MediaDict(dict):
 
     @classmethod
     def from_context(cls, context):
-        if not hasattr(context, cls.context_attribute):
-            setattr(context, cls.context_attribute, cls())
-        return getattr(context, cls.context_attribute)
+        if not hasattr(context.render_context, cls.context_attribute):
+            setattr(context.render_context, cls.context_attribute, cls())
+        return getattr(context.render_context, cls.context_attribute)
 
 
 class MediaNode(template.Node):
