@@ -40,4 +40,16 @@
     DatePicker widget for all DateFields. Display all fields in common order.</p>
     {% block change_widgets %}{% endblock %}
 </div>
+
+<div>
+    <h2>Exclude a single field widgets</h2>
+    <p>Use registration_form. Don't render the birthday field.</p>
+    {% block exclude_fields %}{% endblock %}
+</div>
+
+<div>
+    <h2>Render multiple fields as hidden fields</h2>
+    <p>Use long_form. Render all IntegerFields as hidden fields.</p>
+    {% block hidden_fields %}{% endblock %}
+</div>
 {% endblock %}

@@ -45,3 +45,8 @@
 
     {% form long_form using widget PasswordInput for long_form.char2 and widget DatePicker for DateField %}
 {% endblock %}
+
+
+{% block exclude_fields %}
+    {% form registration_form using exclude "birthday" %}
+{% endblock %}

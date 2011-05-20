@@ -2,7 +2,7 @@
 
 
 {% block complete_form %}
-    {% form registration_form %}
+    {% renderform registration_form %}
 {% endblock %}
 
 
@@ -10,7 +10,7 @@
     {% form %}
         {% layout "ul" %}
         <ul>
-            {% form registration_form %}
+            {% renderform registration_form %}
         </ul>
     {% endform %}
 {% endblock %}
@@ -27,14 +27,14 @@
     {% form %}
         {% layout "ul" %}
         <ul>
-            {% form color_form %}
+            {% renderform color_form %}
         </ul>
     {% endform %}
 
     {% form %}
         {% layout "table" %}
         <table>
-            {% form registration_form %}
+            {% renderform registration_form %}
         </table>
     {% endform %}
 {% endblock %}
@@ -42,11 +42,11 @@
 
 {% block field_order %}
     {% form %}
-        {% field registration_form.email %}
-        {% field registration_form.password %}
-        {% field registration_form.first_name %}
-        {% field registration_form.last_name %}
-        {% field registration_form.birthday %}
+        {% renderfield registration_form.email %}
+        {% renderfield registration_form.password %}
+        {% renderfield registration_form.first_name %}
+        {% renderfield registration_form.last_name %}
+        {% renderfield registration_form.birthday %}
     {% endform %}
 {% endblock %}
 
@@ -55,6 +55,22 @@
     {% form %}
         {% widget PasswordInput for long_form.char2 %}
         {% widget DatePicker for DateField %}
-        {% form long_form %}
+        {% renderform long_form %}
+    {% endform %}
+{% endblock %}
+
+
+{% block exclude_fields %}
+    {% form %}
+        {% excludefield registration_form.birthday %}
+        {% renderform registration_form %}
+    {% endform %}
+{% endblock %}
+
+
+{% block hidden_fields %}
+    {% form %}
+        {% hidefield IntegerField %}
+        {% renderform long_form %}
     {% endform %}
 {% endblock %}
