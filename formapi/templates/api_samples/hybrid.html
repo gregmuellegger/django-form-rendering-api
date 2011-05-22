@@ -1,0 +1,62 @@
+{% extends "base_sample.html" %}
+
+
+{% block complete_form %}
+    {% renderform registration_form %}
+{% endblock %}
+
+
+{% block as_ul %}
+    {% form %}
+        {% formlayout "ul" %}
+        <ul>
+            {% renderform registration_form %}
+        </ul>
+    {% endform %}
+{% endblock %}
+
+
+{% block single_field %}
+    {% renderform registration_form "first_name" %}
+{% endblock %}
+
+
+{% block two_forms %}
+    {% form %}
+        {% formlayout "ul" %}
+        <ul>
+            {% renderform color_form %}
+        </ul>
+    {% endform %}
+
+    {% form %}
+        {% formlayout "table" %}
+        <table>
+            {% renderform registration_form %}
+        </table>
+    {% endform %}
+{% endblock %}
+
+
+{% block field_order %}
+    {% renderform registration_form "email" "password" "first_name" "last_name" "birthday" %}
+{% endblock %}
+
+
+{% block change_widgets %}
+    {% form %}
+        {% widget widgets.PasswordInput for long_form.char2 %}
+        {% widget widgets.DatePicker for formfield.DateField %}
+        {% renderform long_form %}
+    {% endform %}
+{% endblock %}
+
+
+{% block exclude_fields %}
+    {% renderform registration_form exclude "birthday" %}
+{% endblock %}
+
+
+{% block hidden_fields %}
+    {% renderform long_form hidden formfield.IntegerField %}
+{% endblock %}
